@@ -1,23 +1,26 @@
 /* See LICENSE file for copyright and license details. */
 
+#define BROWSER "firefox"
+
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 7;        /* gaps between windows */
+static const unsigned int gappx     = 9;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=16" };
-static const char dmenufont[]       = "monospace:size=16";
+static const char *fonts[]          = { "monospace:size=12" };
+static const char dmenufont[]       = "monospace:size=12";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
 static char selbordercolor[]        = "#005577";
 static char selbgcolor[]            = "#005577";
+static char blackColor[]            = "#000000";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+       [SchemeNorm] = { normfgcolor, blackColor, normbordercolor },
+       [SchemeSel]  = { blackColor,  selbgcolor,  selbordercolor  },
 };
 
 /* tagging */
@@ -58,7 +61,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", blackColor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", blackColor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static const Key keys[] = {
@@ -100,6 +103,10 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("prompt 'Seguro que quieres apagar el pc?' 'shutdown now'") },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("prompt 'Seguro que quieres suspender el pc?' 'systemctl suspend'") },
+	{ MODKEY|ShiftMask,             XK_r,      spawn,          SHCMD("prompt 'Seguro que quieres reiniciar el pc?' 'reboot'") },
+	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
 };
 
 /* button definitions */

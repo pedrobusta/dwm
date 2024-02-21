@@ -4,5 +4,5 @@
 - [x] Gaps
 - [x] xrdb
 - [ ] Autostart
-- [ ] Scratchpads
+- [x] Scratchpads
 
